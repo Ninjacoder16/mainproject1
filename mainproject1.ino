@@ -47,7 +47,7 @@ void loop() {
 
   Ualtrasonic();
 }
-
+//yogita's code
 void Ualtrasonic() {
   // Send a pulse to the trigger pin to start the ultrasonic sensor
   digitalWrite(TRIG_PIN, HIGH);
