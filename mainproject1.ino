@@ -11,6 +11,7 @@ void setup() {
   Serial.begin(115200); // Initialize serial communication
   dht.begin();          // Initialize the DHT sensor
   Serial.println("DHT11 sensor initialized.");
+  Serial.println("New addded");
 }
 
 void loop() {
