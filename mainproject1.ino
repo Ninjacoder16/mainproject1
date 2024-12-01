@@ -7,11 +7,13 @@
 #define DHTTYPE DHT11 // Specify DHT11 sensor type
 #define LED 13         // LED connected to digital pin 13
 #define MQ2pin 12     // MQ2 sensor connected to analog pin A0
+#define LDR_PIN 14;  // Use a suitable ADC pin on the ESP32
 
 
 
 void Ualtrasonic();
 void gas_sensor();
+void lrd_sensor();
 
 // Initialize DHT sensor
 DHT dht(DHTPIN, DHTTYPE);
@@ -26,7 +28,7 @@ void setup() {
   pinMode(ECHO_PIN, INPUT);
   pinMode(LED, OUTPUT);       // Set the LED pin as an output
   pinMode(MQ2pin, INPUT);       // Set the LED pin as an output
-
+  pinMode(LDR_PIN, INPUT);       // Set the LED pin as an output
   // Ensure the trigPin starts LOW
   digitalWrite(TRIG_PIN, LOW);
   delay(50);
@@ -92,11 +94,19 @@ void gas_sensor(){
     Serial.print("Sensor Value: "); 
     Serial.println(sensorValue);
   }
-  
   delay(1000);  // Wait for 1 second
 }
 
+// Define the analog pin where the LDR is connected
 
+void lrd_sensor() {
+  // Read the value from the LDR (0-4095 for ESP32)
+  int ldrValue = analogRead(LDR_PIN);   // Convert the ADC value to voltage (optional, based on 3.3V)
+  // float voltage = ldrValue * (3.3 / 4095.0);
+  Serial.println("LDR Value: ");    // Print the LDR value and voltage to the Serial Monitor
+  Serial.println(ldrValue);
+  delay(500);    // Delay to slow down readings
+}
 
 
 
