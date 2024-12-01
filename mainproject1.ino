@@ -1,5 +1,5 @@
 #include <DHT.h>
-
+     
 #define TRIG_PIN 5  // Define the GPIO pin connected to the Trigger
 #define ECHO_PIN 18 // Define the GPIO pin connected to the Echo
 // Define DHT type and GPIO pin
