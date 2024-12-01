@@ -5,7 +5,14 @@
 // Define DHT type and GPIO pin
 #define DHTPIN 4      // GPIO pin where the DHT11 is connected
 #define DHTTYPE DHT11 // Specify DHT11 sensor type
+#define LED 13         // LED connected to digital pin 13
+#define MQ2pin 12     // MQ2 sensor connected to analog pin A0
+
+
+
 void Ualtrasonic();
+void gas_sensor();
+
 // Initialize DHT sensor
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -17,6 +24,8 @@ void setup() {
   // Set the trigPin as OUTPUT and echoPin as INPUT
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
+  pinMode(LED, OUTPUT);       // Set the LED pin as an output
+  pinMode(MQ2pin, INPUT);       // Set the LED pin as an output
 
   // Ensure the trigPin starts LOW
   digitalWrite(TRIG_PIN, LOW);
@@ -47,7 +56,7 @@ void loop() {
 
   Ualtrasonic();
 }
-
+  
 void Ualtrasonic() {
   // Send a pulse to the trigger pin to start the ultrasonic sensor
   digitalWrite(TRIG_PIN, HIGH);
@@ -68,5 +77,27 @@ void Ualtrasonic() {
   // Delay before taking the next reading
   delay(500);
 }
+
+
+void gas_sensor(){
+  float sensorValue;          // Variable to store the sensor value
+  sensorValue = analogRead(MQ2pin);  // Read the analog value from the MQ2 sensor
+  
+  if (sensorValue >= 250) {   // Check if the sensor value exceeds the threshold
+    digitalWrite(LED, HIGH);  // Turn the LED on
+    Serial.print(sensorValue); 
+    Serial.println(" | GAS DETECTED");
+  } else {
+    digitalWrite(LED, LOW);   // Turn the LED off
+    Serial.print("Sensor Value: "); 
+    Serial.println(sensorValue);
+  }
+  
+  delay(1000);  // Wait for 1 second
+}
+
+
+
+
 
 
