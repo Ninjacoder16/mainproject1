@@ -14,6 +14,7 @@
 void Ualtrasonic();
 void gas_sensor();
 void lrd_sensor();
+void temp_hum();
 
 // Initialize DHT sensor
 DHT dht(DHTPIN, DHTTYPE);
@@ -34,10 +35,13 @@ void setup() {
 }
 
 void loop() {
-
-
+  lrd_sensor();
+  temp_hum();
+  gas_sensor();
   Ualtrasonic();
+  delay(1000);  // Wait for 1 second
 }
+
 void temp_hum() {
   delay(2000);  // Wait a few seconds between measurements
   // Reading temperature and humidity
@@ -75,7 +79,7 @@ void Ualtrasonic() {
   // Print the distance to the Serial Monitor
   Serial.print("Distance: ");
   Serial.print(distance);
-  Serial.println(" cm");    // Delay before taking the next reading
+  Serial.println(" cm");  // Delay before taking the next reading
   delay(500);
 }
 
