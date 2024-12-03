@@ -1,6 +1,6 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
-
+   
 // Wi-Fi credentials
 const char* ssid = "AIRCON1";
 const char* password = "LT123456";
