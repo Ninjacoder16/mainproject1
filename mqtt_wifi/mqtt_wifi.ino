@@ -4,7 +4,7 @@
 // Wi-Fi credentials
 const char* ssid = "AIRCON1";
 const char* password = "LT123456";
-   
+      
 // MQTT Broker details
 const char* mqtt_server = "mqtt-dashboard.com";  // Example: Eclipse public broker, replace with your broker's IP or domain
 const int mqtt_port = 1883;  // Default MQTT port
