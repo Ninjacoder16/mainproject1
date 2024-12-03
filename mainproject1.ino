@@ -2,20 +2,19 @@
 
 #define TRIG_PIN 5   // Define the GPIO pin connected to the Trigger
 #define ECHO_PIN 18  // Define the GPIO pin connected to the Echo
-// Define DHT type and GPIO pin
 #define DHTPIN 4       // GPIO pin where the DHT11 is connected
 #define DHTTYPE DHT11  // Specify DHT11 sensor type
 #define LED 13         // LED connected to digital pin 13
 #define MQ2pin 12      // MQ2 sensor connected to analog pin A0
 #define LDR_PIN 14     // Use a suitable ADC pin on the ESP32
 #define led_Stree 15
-
+#define pir_pin 19
 
 void Ualtrasonic();
 void gas_sensor();
 void lrd_sensor();
 void temp_hum();
-
+void pir_sensor();
 // Initialize DHT sensor
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -31,6 +30,7 @@ void setup() {
   pinMode(LDR_PIN, INPUT);        // Set the LED pin as an output
   digitalWrite(TRIG_PIN, LOW);    // Ensure the trigPin starts LOW
   digitalWrite(led_Stree, HIGH);  // Ensure the trigPin starts LOW
+  pinMode(pir_pin, INPUT);
   delay(50);
 }
 
@@ -39,9 +39,10 @@ void loop() {
   temp_hum();
   gas_sensor();
   Ualtrasonic();
+  pir_sensor();
   delay(1000);  // Wait for 1 second
 }
-
+//by aarti
 void temp_hum() {
   delay(2000);  // Wait a few seconds between measurements
   // Reading temperature and humidity
@@ -62,7 +63,7 @@ void temp_hum() {
   Serial.print(temperature);
   Serial.println(" °C");
 }
-
+//by aarti
 void Ualtrasonic() {
   // Send a pulse to the trigger pin to start the ultrasonic sensor
   digitalWrite(TRIG_PIN, HIGH);
@@ -83,7 +84,7 @@ void Ualtrasonic() {
   delay(500);
 }
 
-
+//by yogita
 void gas_sensor() {
   float sensorValue;                 // Variable to store the sensor value
   sensorValue = analogRead(MQ2pin);  // Read the analog value from the MQ2 sensor
@@ -99,9 +100,8 @@ void gas_sensor() {
   }
   delay(1000);  // Wait for 1 second
 }
-
 // Define the analog pin where the LDR is connected
-
+//by shweta
 void lrd_sensor() {
   // Read the value from the LDR (0-4095 for ESP32)
   int ldrValue = analogRead(LDR_PIN);  // Convert the ADC value to voltage (optional, based on 3.3V)
@@ -115,3 +115,16 @@ void lrd_sensor() {
   Serial.println(ldrValue);
   delay(500);  // Delay to slow down readings
 }
+
+void pir_sensor(){
+  int pir_value = digitalRead(pir_pin);  // Convert the ADC value to voltage (optional, based on 3.3V)
+
+  if(pir_value==HIGH){
+    Serial.println("Object  detected");
+  }
+  else{
+    Serial.println("object not detected");
+  }
+}
+
+
